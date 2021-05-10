@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Rapport SIA </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="rapport/css/main.css" />
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+</head>
+<body>
+    <section>
+        <div id="logo" class="black_box">
+            <span>Projet SIA - OLAZAGAZTI LUCAS</span>
+        </div>
+    </section>
+    <div id="main_contener">
+        <div id="conteners">
+            <div id="left_content">
+                <h1 style="padding-top: 20px;">INTRODUCTION</h1>
+                <p>
+                    Pour ce projet il a fallu faire le jeu <strong>Space Invaders</strong> sous forme de jeu tournant sur navigateur web en utilisant la bibliotheque <strong>Javascript Three.JS</strong>.
+                    Donc une sorte de remake du jeu vidéo en reprenant les bases de <a href="https://funhtml5games.com/spaceinvaders/index.html">cette version</a> et en ajoutant certaines features.
+                </p>
+
+                <h1>GRAPHISME</h1>
+                <p>
+                    Pour le choix des modèles utilisés , j'ai simplement récupérer les modèles Blinder de <strong><a href="https://www.blendswap.com/blend/9985">ce lien.</a></strong> Je les ai ensuite exporter en JSON puis utilisé.
+                </p>
+
+                <!-- IMAGE -->
+                <img id="image-1" src="rapport/images/blender.PNG" alt="Modele Blender">
+                <div id=" myModal " class="modal">
+                    <span class="close ">&times;</span>
+                    <img class="modal-content " id="img01">
+                    <div id="caption "></div>
+                </div>
+
+                <h1>LES TYPES DE MECHANTS</h1>
+                <div>
+                    <ul>
+                        <li><strong>Les Méchants</strong> sont représentés par 3 types d'<strong>Aliens</strong>.Chaque <i>aliens</i> se diffère par une couleur (Jaune/Orange/Bleu).Il y a un nombre de points gagnés différent pour chaque mechants (jaune 10 points, orange 20 et bleu 40).</li>
+                    </ul>
+                </div>
+
+                <h1>ESPACE</h1>
+                <p>
+                    Le jeu se situe sur un simple plateau quadrillé flottant dans l’espace.
+                </p>
+                <p>
+                    L’espace a été modélisé en utilisant une Skybox sphérique dont les normales sont tournées vers l'intérieur et en utilisant une image à haute résolution.
+                </p>
+                <p>
+                    De plus, j'ai généré dynamiquement des particules représentant des étoiles à l’aide de <a href="https://aerotwist.com/tutorials">ce site internet</a>.
+                </p>
+                <h1>ARCHITECTURE </h1>
+                <h2>Organisation </h2>
+                <div>
+                    <ul>
+                        <li>Le fichier <strong>index.js</strong> est le point d'entrée du programme. Il instancie un objet de type <strong>main</strong> et invoque sa méthode <strong>animate()</strong>, ce qui a pour but de lancer l’animation générale du
+                            jeu.
+                        </li>
+                        <li>Le fichier <strong>main.js</strong> est la classe principale contenant le moteur du programme. Tous les prototypes y sont instanciés.. Il contient entre autres les fonctions <strong>init()</strong> et <strong>animate()</strong>                            qui permettent d’instancier et d’animer le jeu.</li>
+                        <li>Le fichier <strong>modele.js</strong> permet de manière générale et dynamique, en récupérant en paramètre des données spécifiques telles que les hitbox, le chemin du fichier
+                            du modèle 3D, de pouvoir charger le modèle et de le paramétrer.</li>
+                    </ul>
+                </div>
+                <h2><i>This</i> et héritage </h2>
+                <p>
+                    Toutes les classes sont reliées les unes aux autres par les <strong>heritages</strong> et <strong>chaine de prototypage (Object.Create)</strong>.
+                </p>
+                <p>
+                    La classe <strong>main.js</strong> par exemple, qui est la classe centrale, surcharge la classe parente qui est <strong>THREE.Scene</strong>. Cela signifie qu’un objet <em>main</em> hérite de toutes les propriétés de <strong>THREE.Scene</strong>                    et ainsi l'écriture <em>this</em> de l’objet main équivaut au <em>this</em> de <strong>THREE.Scene</strong>.
+                </p>
+                <h2>La classe <i>modele</i></h2>
+                <p>
+                    Cette classe est connectée à plusieurs autres classes. Elle a pour but d’instancier, charger le modèle de toutes les entités (joueur, mechants, boucliers et projectiles). <br /><br />
+                </p>
+
+                <h1>GESTION DES EVENEMENTS</h1>
+                <h2>Les <i>Hitbox</i></h2>
+                <p>
+                    Après avoir chargé un modèle, un <i>cube blanc visible</i> a été créé et ainsi par des translations/agrandissements, j'ai ajustés à la volée et visuellement le cube pour qu’il englobe parfaitement le modèle.
+                </p>
+
+                <h2>Les <i>Collisions</i> </h2>
+                <p>
+                    Les collisions entre les projectiles et les différentes entités (joueur, mechants et boucliers) sont gérés par une unique méthode dans la classe <strong>Projectile</strong>. Les collisions sont gérées par un <strong>Raycaster</strong>                    de la manière suivante:
+                </p>
+                <div>
+                    <ul>
+                        <li><strong>Joueur</strong> et <strong>mechants</strong> détectent les collisions et cela induit la perte d'un point de vie par le joueur et la destruction du mechant (suppression visuelle de la scène).</li>
+                            Concernant les <strong>boucliers</strong>, je n'ai pas réussi a implémenter la destruction partielle d’un bouclier .
+                        </li>
+                    </ul>
+                </div>
+
+                <h2><i>Intelligence artificielle</i> et dynamisme</h2>
+                <h3><i>Intelligence artificielle</i></h3>
+                <p>
+                    Les mechants sont dotés d'une intelligence artificielle. Il existe une fonction dans la classe <strong>ligneMechant</strong> qui sélectionne le mechant <em>le plus proche du joueur</em> pour tirer. De plus, la <em>cadence des tirs augmente</em>                    proportionnellement et dynamiquement avec les niveaux.
+                </p>
+                <h3>Dynamisme</h3>
+                <p>
+                    La classe <strong>horde</strong> représente l’ensemble des mechants.<br /> Parmis cette horde, la classe <strong>ligneMechant</strong> représente les lignes de mechants. Cela permet de gérer <strong>indépendamment</strong> le dynamisme
+                    de chaque ligne. La composition des lignes est variée et générée dynamiquement, ainsi que leur vitesse de déplacement.<br />
+                </p>
+                <h1>AUDIO, CAMERAS </h1>
+                <h2>Audio</h2>
+                <p>
+                    Il y a deux musiques , une dans l'écran d'accueil et l'autre durant le jeu(ces deux musique provienne du jeu vidéo <strong>Ratchet and Clank</strong>).
+                </p>
+                <p>
+                    On notera qu'un son est émis pour le game over et pour certaine collisions (joueur et boucliers).
+                </p>
+                <h2>Interactions</h2>
+                <p>
+                 <div>
+                    <ul>
+                        <li><strong>Touche H</strong>: a été implémentée et permet d’afficher une boîte de dialogue informant sur les touches pour tirer, déplacer le joueur.</li>
+                        <li><strong>Touche F</strong>: a été implémentée et permet l’affichage en plein écran .</li>
+                        <li><strong>Touche K</strong>: a été implémentée et permet d'éliminer tous les mechants(Triche).</li>
+                        <li><strong>Touche S</strong>: a été implémentée et permet de faire un screenshot.</li>
+                    </ul>
+                </div>
+                </p>
+                <h2>Les Caméras</h2>
+                <p>
+                    Deux vues de caméras sont disponibles et on peut y accéder en pressant les touches suivantes:
+                </p>
+                <div>
+                    <ul>
+                        <li><strong>Touche 0</strong>: caméra par défaut</li>
+                        <li><strong>Touche 1</strong>: caméra joueur en vue première personne</li>
+                    </ul>
+                </div>
+
+                <p>
+                    Une transition visuelle est effectuée lorsque l’on presse les différentes touches de caméra grâce à <strong>Tween.Js</strong>.
+                </p>
+                <h1>BIBLIOTHEQUES UTILISEES</h1>
+                <h2><a href="https://jeremyckahn.github.io/keydrown/" alt="Keydrown.js">Keydrown.js</a></h2>
+                <p>
+                    Cette API permet de gérer les <strong>évènements claviers</strong> (events <em>KeyUp</em> et <em>KeyDown</em>).
+                </p>
+                <h2><a href="https://howlerjs.com/" alt="Howler.js">Howler.js</a></h2>
+                <p>
+                    Cette API est dédiée à la gestion de la <strong>musique et des sons audios</strong>.
+                </p>
+                <h2><a href="https://howlerjs.com/" alt="Tween.js">Tween.js</a></h2>
+                <p>
+                    <strong>L'unique</strong> API <em>JavaScript</em> permet de gérer les <strong>effets de Tweening</strong>.
+                </p>
+
+                <h2><a href="http://www.threejsgames.com/extensions/" alt="Threex.js">Threex.js</a></h2>
+                <p>
+                    Cette riche API, basée sur <strong>Three.js</strong>, est dédiée au jeu vidéo. Dans notre cas, nous avons simplement utilisé les fonctions <em>THREEx.Fullscreen</em>, <em>THREEx.WindowResize</em> et <em>THREEx.screenshot</em> permettant
+                    respectivement l’affichage en <strong>plein écran</strong>, <strong>d’adapter dynamiquement</strong> la taille de la fenêtre et la <strong>capture d’écran</strong>.
+                </p>
+   </body>
+</html>

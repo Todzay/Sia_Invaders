@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'pixel';
+    src: url('fonts/joystixmonospace.ttf');
+}
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    overflow: hidden;
+    color: white;
+    font-family: pixel;
+    background-color: black;
+}
+
+#info_top_left {
+    text-decoration: none;
+    position: absolute;
+    font-family: pixel;
+    font-size: 2.3em;
+    top: 0;
+    left: 0;
+    padding-top: 40px;
+    padding-left: 20px;
+}
+
+#info_top_right {
+    text-decoration: none;
+    text-align: center;
+    position: absolute;
+    font-family: pixel;
+    font-size: 6em;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+#info_bottom {
+    text-align: center;
+    font-family: pixel;
+    font-size: 1.4em;
+    text-decoration: none;
+    border-radius: 10% 25%;
+    position: absolute;
+    padding: 35px;
+    right: 0;
+    bottom: 0;
+}
+
+#info_middle {
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    font-family: pixel;
+    font-size: 1.6em;
+    width: 450px;
+    min-width: 450px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+}
+
+#accueil, #bande-message {
+    z-index: 5;
+    width: 100%;
+    visibility: hidden;
+    position: absolute;
+    bottom: 70%;
+    min-height: 20%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#centre-accueil, #centre-message {
+    z-index: 5;
+    visibility: hidden;
+    position: absolute;
+    margin: 0px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    display: table-cell;
+    color: #ffffff;
+    background-color: rgba(173, 150, 10, 0.2);
+    vertical-align: middle;
+    font-family: pixel;
+}
+
+#sia-title {
+    font-size: 400%;
+    text-transform: uppercase;
+}
+
+#sia {
+    color: #AD960A;
+    font-size: 1.7em;
+    font-family: pixel;
+}
+
+#message {
+    font-size: 400%;
+    text-transform: uppercase;
+    font-family: pixel;
+}
+
+#auteur, #instruction {
+    padding-top: 10px;
+    padding-bottom: 25px;
+    font-size: 2.5em;
+    font-family: pixel;
+}
+
+#instruction-accueil, #scorefinal {
+    padding: 20px;
+    font-size: 1.5em;
+    font-family: pixel;
+}
+
+#instruction-accueil {
+    animation: 1s blinker linear infinite;
+}
+
+@-moz-keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+#points {
+    font-size: 250%;
+    text-align: center;
+}
+
+.text-blue {
+  color: #00BFFF;
+}
+
+.rouge {
+    color: #8B0000;
+}
